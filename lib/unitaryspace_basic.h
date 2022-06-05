@@ -14,7 +14,7 @@ namespace clfsim {
         struct UnitarySpaceBasic
             : public UnitarySpace<UnitarySpaceBasic<For, FP>, VectorSpace, For, FP> {
                 private:
-                    using Base = UnitarySpace<UnitarySpaceBasic<For, FP>, :qsim::VectorSpace, For, FP>;
+                    using Base = UnitarySpace<UnitarySpaceBasic<For, FP>, :clfsim::VectorSpace, For, FP>;
 
                 public:
                     using Unitary = typename Base::Unitary;

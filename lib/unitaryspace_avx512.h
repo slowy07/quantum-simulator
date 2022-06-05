@@ -17,7 +17,7 @@ namespace clfsim {
         struct UnitarySpaceAVX512 :
             public UnitarySpace<UnitarySpaceAVX512<For>, VectorSpace, For, float> {
                 private:
-                    using Base = UnitarySpace<UnitarySpaceAVX512<For>, qsim::VectorSpace, For, Float>;
+                    using Base = UnitarySpace<UnitarySpaceAVX512<For>, clfsim::VectorSpace, For, Float>;
                 
                 public:
                     using Unitary = typename Base::Unitary;
