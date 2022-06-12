@@ -25,7 +25,7 @@
 #include "simulator.h"
 #include "unitaryspace_sse.h"
 
-namespace qsim {
+namespace clfsim {
 namespace unitary {
 
 /**
@@ -634,6 +634,6 @@ class UnitaryCalculatorSSE final : public SimulatorBase {
 };
 
 }  // namespace unitary
-}  // namespace qsim
+}  // namespace clfsim
 
 #endif  // UNITARY_CALCULATOR_SSE_H_
