@@ -24,7 +24,7 @@ struct Options {
 };
 
 Options GetOptions(int argc, char* argv[]) {
-    constexpr char usage[] = "usage:\n  ./qsim_base -c circuit -d maxtime "
+    constexpr char usage[] = "usage:\n  ./clfsim_base -c circuit -d maxtime "
                            "-s seed -f max_fused_size -t num_threads"
                            "-n num_dblocks -v verbosity\n";
 
@@ -54,7 +54,7 @@ Options GetOptions(int argc, char* argv[]) {
                 opt.verbosity = std::atoi(optarg);
                 break;
             default:
-                qsim::IO::errorf(usage);
+                clfsim::IO::errorf(usage);
                 exit(1);
         }
     }

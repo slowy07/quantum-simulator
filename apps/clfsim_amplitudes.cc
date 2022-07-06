@@ -18,7 +18,7 @@
 #include "../lib/util.h"
 #include "../lib/util_cpu.h"
 
-constexpr char usage[] = "usage:\n  ./qsim_amplitudes -c circuit_file "
+constexpr char usage[] = "usage:\n  ./clfsim_amplitudes -c circuit_file "
                          "-d times_to_save_results -i input_files "
                          "-o output_files -s seed -t num_threads "
                          "-f max_fused_size -v verbosity -z\n";

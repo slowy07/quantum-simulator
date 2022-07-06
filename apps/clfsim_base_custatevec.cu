@@ -25,7 +25,7 @@ struct Options {
 };
 
 Options GetOptions(int argc, char *argvp[]) {
-    constexpr char usage[] = "usage:\n  ./qsim_base -c circuit -d maxtime "
+    constexpr char usage[] = "usage:\n  ./clfsim_base -c circuit -d maxtime "
                             "-s seed -f max_fused_size -v verbosity\n";
 
     Options opt;
