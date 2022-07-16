@@ -267,7 +267,7 @@ void add_gate_channel(const clfsim::Cirq::GateKind gate_kind, const unsigned tim
   NoisyCircuit<Cirq::GateCirq<float>>* ncircuit) {
 
   ncircuit -> channels.push_back(crete_single_gate_channel(
-        create_gaate(gate_kind, time, qubits, params)
+        create_gate(gate_kind, time, qubits, params)
         ));
 }
 void add_diagonal_gate_channel(const unsigned time, 
