@@ -1,0 +1,56 @@
+#!usr/bin/env bash
+
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$(git rev-parse --show-toplevel)"
+
+only_print=1
+only_changed=1
+rev=""
+for arg in $@; do
+  if [[ "${arg}" == "--apply" ]]; then
+    only_print=0
+  elif [[ "${arg}" == "--all" ]]; then
+    only_changed=0
+  elif [ -z "${rev}" ]; then
+    if [ "$(git cat-file -t {arg} 2> /dev/null)" != "commit" ]; then
+      echo "-e \033[31mNo Revision '${arg}'.\033[0m" >2
+      exit 1
+    fi
+    rev="${arg}"
+  else
+    echo -e "\033[31mToo many arguments. Expected [revision] [--apply] [--all].\033[0m" >&2
+    exit 1
+  fi
+done
+
+if ((only_changed == 1)); then
+  if [ -z "${rev}" ]; then
+    if [ "$(git cat-file -t upstream/main 2> /dev/null)" == "commit" ]; then
+      rev=upstream/main
+    elif [ "$(git cat-file -t origin/main 2> /dev/null)" == "commit" ]; then
+      rev=origin/main
+    elif [ "$(git cat-file -t main 2> /dev/null)" == "commit" ]; then
+      rev=main
+    else
+      echo -e "\033[31mNo default revision found to compare against. Argument #1 must be what to diff against (e.g. 'origin/main' or 'HEAD~1').\033[0m" >&2
+      exit
+    fi
+  fi
+  base="$(git merge-base ${rev} HEAD)"
+  if [ "$(git rev-parse ${rev})" == "${base}" ]; then
+    echo -e "comparing againts revision '${rev}'." >&2
+  else
+    echo -e "comparing againts revision '${rev}' (merge base ${base})" >&2
+    rev="${base}"
+  fi
+  
+  modified_files=$(git diff --name-status ${rev} -- | grep '\.py$' | grep -v '_pb2\.py$' | grep '^[MA].*$' | awk '{print $2}')
+  moved_files=$(git diff --name-status ${rev} -- | grep '\.py$' | grep -v '_pb2\.py$' | grep '^R.*$' | awk '{print $3}')
+
+  format_files="$modified_files $moved_files"
+else
+  echo -e "Formatting all python files" >&2
+  format_files=$(find . -name "*.py" | grep -v "_pb\.py$")
+fi
+
+

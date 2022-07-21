@@ -1,0 +1,24 @@
+version: "3"
+services:
+  clfsim:
+    image: clfsim
+    container_name: clfsim
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  clfsim-cxx-test:
+    image: clfsim-cxx-test
+    container_name: clfsim-cxx-test
+    build:
+      context: ./
+      dockerfile: test/Dockerfile
+    depends_on:
+    - clfsim
+  clfsim-py-test:
+    image: clfsim-py-test
+    container_name: clfsim-py-test
+    build:
+      context: ./
+      dockerfile: pybind_interface/Dockerfile
+    depends_on:
+    - clfsim

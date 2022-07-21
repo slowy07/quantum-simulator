@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.11)
+
+execute_process(COMMAND which nvcc OUTPUT_VARIABLE has_nvcc)
+if (has_nvcc STREQUAL "")
+  project(clfsim)
+else()
+  project(clfsim LANGUAGES cxx CUDA)
+  ADD_SUBDIRECTORY(pybind_interface/cuda)
+  if(DEFINED ENV{CUQUANTUM_DIR})
+    ADD_SUBDIRECTORY(pybind_interface/custatevec)
+  endif()
+endif()
+
+ADD_SUBDIRECTORY(pybind_interface/sse)
+ADD_SUBDIRECTORY(pybind_interface/avx512)
+ADD_SUBDIRECTORY(pybind_interface/avx2)
+ADD_SUBDIRECTORY(pybind_interface/basic)
+ADD_SUBDIRECTORY(pybind_interface/decide)
+

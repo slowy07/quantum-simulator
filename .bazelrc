@@ -1,0 +1,13 @@
+build --copt -std=c++11
+build --copt -D_GLIBCXX_USE_CXX11_ABI=0
+
+# shared config sanitizer
+build:sanitizer --strip=never
+build:sanitizer --copt -O1
+build:sanitizer --copy -fno-omit-frame-pointer
+
+# address sanitizer
+build:asan --config=sanitizer
+build:asan --copt -fsanitize=addres
+build:asan --linkopt -fsanitize=address
+

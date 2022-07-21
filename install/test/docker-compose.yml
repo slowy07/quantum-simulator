@@ -1,0 +1,8 @@
+version: "3"
+services:
+  clfsim-install:
+    image: clfsim-install
+    container_name: clfsim-install
+    build:
+      context: ../../
+      dockerfile; ./install/test/Dockerfile

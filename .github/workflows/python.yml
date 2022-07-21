@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+    path:
+      - '**/*.py'
+
+  jobs:
+    format:
+      name: checkformat
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - uses: actions/setup-python@v1
+          with:
+            python-version: '3.7'
+            architecture: 'x64'
+        - name: install dev requirements
+          run: pip install -r dev-requirements.txt
+        - name: format
+          run: check/format-incremental

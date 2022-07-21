@@ -32,3 +32,12 @@
 *.exe
 *.out
 *.app
+*.x
+
+__pycache__
+.ipynb_checkpoints
+/build
+*.egg-info
+
+.idea/*
+eigen
